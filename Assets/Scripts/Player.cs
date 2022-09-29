@@ -12,20 +12,37 @@ public class Player : MonoBehaviour
     public float verticalPosition;
 
     public float verticalSpeed = 10.0f;
+    public bool usingMobileInput = false;
 
     public Camera camera;
 
     // Start is called before the first frame update
     void Start()
     {
-        camera = Camera.main; 
-    }
+        camera = Camera.main;
+
+        /*   if (Application.platform != RuntimePlatform.Android &&
+               Application.platform != RuntimePlatform.IPhonePlayer)
+           {
+               usingMobileInput = false;
+           }
+           else
+           {
+               usingMobileInput = true;
+           }*/
+        usingMobileInput = Application.platform == RuntimePlatform.Android ||
+               Application.platform == RuntimePlatform.IPhonePlayer;
+        }
 
     // Update is called once per frame
     void Update()
     {
-       // ConventionalInput();
-        MobileInput();
+     
+        if (usingMobileInput)
+            MobileInput();
+        else
+            ConventionalInput();
+        
         Move();
 
 
