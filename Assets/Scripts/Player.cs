@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 
     public Camera camera;
 
+    public ScoreManager scoreManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,9 @@ public class Player : MonoBehaviour
            }*/
         usingMobileInput = Application.platform == RuntimePlatform.Android ||
                Application.platform == RuntimePlatform.IPhonePlayer;
-        }
+
+        scoreManager = FindObjectOfType<ScoreManager>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -45,7 +49,10 @@ public class Player : MonoBehaviour
         
         Move();
 
-
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            scoreManager.AddPoint(7);
+        }
         // transform.Translate(new Vector2(x * m_speed, y * m_speed));
     }
 
